@@ -1,3 +1,7 @@
+create database if not exists news_blog;
+
+use news_blog;
+
 create table news
 (
     id          int auto_increment
@@ -10,7 +14,7 @@ create table news
 
 create table comments
 (
-    id      int          not null
+    id      int auto_increment
         primary key,
     author  varchar(255) null,
     message text         not null,
