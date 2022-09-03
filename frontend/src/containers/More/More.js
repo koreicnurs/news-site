@@ -5,7 +5,6 @@ import {apiUrl} from "../../config";
 
 const More = () => {
 
-
     const dispatch = useDispatch();
     const loading = useSelector(state => state.newsCombine.loading);
     const oneNews = useSelector(state => state.newsCombine.oneNews);
@@ -14,12 +13,7 @@ const More = () => {
 
     };
 
-    let newsImage = null;
-    if (oneNews.image) {
-        newsImage = apiUrl + '/uploads/' + oneNews.image;
-    }
-
-    return (
+    return oneNews && (
         <>
             <Card className='image-board-card'>
                 <Typography gutterBottom variant="h5" component="div" className='author'>
@@ -31,13 +25,12 @@ const More = () => {
                 <Typography variant="body2" color="text.secondary" className='message'>
                     Message: {oneNews.description}
                 </Typography>
-                {newsImage ? <CardMedia className='img-board'
+                {oneNews.image ? <CardMedia className='img-board'
                                         component="img"
                                         height="300"
-                                        image={newsImage}
+                                        image={oneNews.image}
                                         alt={oneNews.title}
                 /> : <CardMedia className='img-board'
-
                                 component="img"
                                 height="140"
                                 sx={{display: 'none'}}
