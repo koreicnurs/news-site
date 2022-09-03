@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import {createNews, getNews} from "../../store/actions/newsActions";
 import OneNews from "../../components/OneNews/OneNews";
+import {NavLink} from "react-router-dom";
 
 const News = () => {
     const dispatch = useDispatch();
@@ -30,9 +31,7 @@ const News = () => {
                     />
                 ))}
             </div>
-            {/*<FormImageBoard*/}
-            {/*    createImageBoard={onNewsFormSubmit}*/}
-            {/*/>*/}
+            <NavLink className='btn-link add-link' to='/add'>Add News</NavLink>
         </>
     );
 };

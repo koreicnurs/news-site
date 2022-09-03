@@ -7,11 +7,13 @@ import {Provider} from "react-redux";
 import App from './App';
 import newsReducer from "./store/reducers/newsReducer";
 import './index.css';
+import commentsReducer from "./store/reducers/commentsReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     newsCombine: newsReducer,
+    commentsCombine: commentsReducer,
 });
 
 const store = createStore(

@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {Button, Grid, TextField} from "@mui/material";
-import FileInput from "../UI/FIleInput/FileInput";
+import FileInput from "../../components/UI/FIleInput/FileInput";
+import {useDispatch} from "react-redux";
+import {createNews} from "../../store/actions/newsActions";
 
-const FormNews = ({createImageBoard}) => {
+const FormNews = () => {
+    const dispatch = useDispatch();
     const [state, setState] = useState({
-        author: "",
-        message: "",
+        title: "",
+        description: "",
         image: "",
     });
 
@@ -17,7 +20,7 @@ const FormNews = ({createImageBoard}) => {
             formData.append(key, state[key]);
         });
 
-        createImageBoard(formData);
+        dispatch(createNews(formData));
     };
 
     const inputChangeHandler = e => {
@@ -53,9 +56,9 @@ const FormNews = ({createImageBoard}) => {
                     <TextField
                         fullWidth
                         variant="outlined"
-                        label="Author"
-                        name="author"
-                        value={state.author}
+                        label="Title"
+                        name="title"
+                        value={state.title}
                         onChange={inputChangeHandler}
                     />
                 </Grid>
@@ -66,9 +69,9 @@ const FormNews = ({createImageBoard}) => {
                         fullWidth
                         variant="outlined"
                         type="text"
-                        label="Message"
-                        name="message"
-                        value={state.message}
+                        label="Description"
+                        name="description"
+                        value={state.description}
                         onChange={inputChangeHandler}
                     />
                 </Grid>
