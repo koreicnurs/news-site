@@ -38,7 +38,7 @@ const More = () => {
 
     return loading ? <Spinner/> : oneNews && (
         <>
-            <Card className='image-board-card'>
+            <Card className='news'>
                 <Typography gutterBottom variant="h5" component="div" className='author'>
                     Author: {oneNews.title}
                 </Typography>
@@ -61,17 +61,19 @@ const More = () => {
             </Card>
 
             { comments.map(c => (
-                <Card className='image-board-card' key={c.id}>
-                    <Typography gutterBottom variant="h5" component="div" className='author'>
-                        Author: {c.author}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" className='message'>
-                        At {c.message}
-                    </Typography>
-                    <CardActions>
-                        <Button size="small" onClick={() => clickDeleteComment(c.id)}>Delete</Button>
-                    </CardActions>
-                </Card>
+                <div className='comments'>
+                    <Card className='one-news' key={c.id}>
+                        <Typography gutterBottom variant="h5" component="div" className='author'>
+                            Author: {c.author}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" className='message'>
+                            At {c.message}
+                        </Typography>
+                        <CardActions>
+                            <Button className='btn-comment' size="small" onClick={() => clickDeleteComment(c.id)}>Delete</Button>
+                        </CardActions>
+                    </Card>
+                </div>
             ))
             }
 

@@ -3,6 +3,7 @@ import News from "./containers/News/News";
 import FormNews from "./containers/FormNews/FormNews";
 import More from "./containers/More/More";
 import Layout from "./components/UI/Layout/Layout";
+import './App.css';
 
 const App = () => {
   return (

@@ -1,0 +1,48 @@
+body {
+    background: azure;
+}
+
+.btn-link , .btn-link:visited {
+    border: none;
+    color: #5d5dff;
+    text-align: center;
+    padding: 0 10px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.btn-link:hover, .btn-link:active {
+    background-color: #bebeee;
+    border-radius: 20px;
+}
+
+.add-link {
+    font-size: 1.5em;
+    align-self: end;
+    font-family: Purisa;
+}
+.btn {
+    font-size: 15px;
+}
+
+.news {
+    margin: 20px;
+    padding: 20px;
+}
+
+.one-news {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.comments {
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.btn-comment {
+    margin-left: auto;
+}

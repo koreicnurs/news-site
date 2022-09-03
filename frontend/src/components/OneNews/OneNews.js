@@ -10,9 +10,9 @@ const OneNews = (props) => {
     }
 
     return (
-        <Card className='image-board-card'>
+        <Card className='one-news'>
             <Typography gutterBottom variant="h5" component="div" className='author'>
-                Author: {props.title}
+                Title: {props.title}
             </Typography>
             <Typography variant="body2" color="text.secondary" className='message'>
                 At {props.date}
@@ -32,8 +32,8 @@ const OneNews = (props) => {
                             sx={{display: 'none'}}
             />}
             <CardActions>
-                <NavLink className='btn-link add-link' to={`/news/${props.oneId}`} onClick={props.clickMore}>Read More</NavLink>
-                <Button size="small" onClick={props.clickDelete}>Delete</Button>
+                <NavLink className='btn-link' to={`/news/${props.oneId}`} onClick={props.clickMore}>Read More</NavLink>
+                <Button className='btn' size="small" onClick={props.clickDelete}>Delete</Button>
             </CardActions>
         </Card>
     );

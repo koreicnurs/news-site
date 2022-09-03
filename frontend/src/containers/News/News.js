@@ -21,7 +21,8 @@ const News = () => {
 
     return loading ? <Spinner/> : (
         <>
-            <div className='image-board-container'>
+            <NavLink className='btn-link add-link' to='/add'>Add News</NavLink>
+            <div className='news'>
                 {news.map(i => (
                     <OneNews
                         key={i.id}
@@ -35,7 +36,6 @@ const News = () => {
                     />
                 ))}
             </div>
-            <NavLink className='btn-link add-link' to='/add'>Add News</NavLink>
         </>
     );
 };
