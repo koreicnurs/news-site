@@ -4,14 +4,17 @@ const mySqlDb = require('../mySqlDb');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const [comments] = await mySqlDb.getConnection().query('SELECT * from comments');
     const newsId = req.query.news_id;
     if(newsId) {
         console.log(newsId);
-        const [comments] = await mySqlDb.getConnection().query('SELECT * FROM comments where news_id=newsId');
+        console.log(req.query.news_id);
+        const [comments] = await mySqlDb.getConnection().query('SELECT * FROM comments where news_id=${req.query.news_id}');
         console.log(comments);
+        res.send(comments)
+    } else {
+        const [comments] = await mySqlDb.getConnection().query('SELECT * from comments');
+        res.send(comments);
     }
-    res.send(comments);
 });
 
 router.post('/',  async (req, res) => {

@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Card, CardMedia, Grid, TextField, Typography} from "@mui/material";
-import {apiUrl} from "../../config";
-import {createNews} from "../../store/actions/newsActions";
-import FileInput from "../../components/UI/FIleInput/FileInput";
 import {createComment} from "../../store/actions/commetsActions";
 
 const More = () => {
