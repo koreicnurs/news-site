@@ -64,7 +64,7 @@ const More = () => {
                 <div className='comments'>
                     <Card className='one-news' key={c.id}>
                         <Typography gutterBottom variant="h5" component="div" className='author'>
-                            Author: {c.author}
+                            Author: author={c.author ? c.author : 'Anonymous'}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" className='message'>
                             Message: {c.message}
