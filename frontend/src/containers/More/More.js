@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Card, CardActions, CardMedia, Grid, TextField, Typography} from "@mui/material";
-import {createComment, deleteComment, getComments} from "../../store/actions/commetsActions";
+import {createComment, deleteComment} from "../../store/actions/commetsActions";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import {useRouteMatch} from "react-router-dom";
+import {getOneNews} from "../../store/actions/newsActions";
 
 const More = () => {
-
     const dispatch = useDispatch();
     const loading = useSelector(state => state.newsCombine.loading);
     const oneNews = useSelector(state => state.newsCombine.oneNews);
@@ -18,13 +17,15 @@ const More = () => {
         news_id: Number(""),
     });
 
-    const clickDeleteComment = (id) => {
-        dispatch(deleteComment(id))
+    const clickDeleteComment = async (id) => {
+        await dispatch(deleteComment(id));
+        dispatch(getOneNews(oneNews.id));
     };
 
-    const submitFormHandler = e => {
+    const submitFormHandler = async (e) => {
         e.preventDefault();
-        dispatch(createComment(state));
+        await dispatch(createComment(state));
+        dispatch(getOneNews(oneNews.id));
     };
 
     const inputChangeHandler = e => {
@@ -75,7 +76,7 @@ const More = () => {
             }
 
 
-            <form
+            {loading ? <Spinner/> : <form
                 autoComplete="off"
                 onSubmit={submitFormHandler}
                 style={{marginBottom: '50px'}}
@@ -129,7 +130,7 @@ const More = () => {
                         <Button type="submit" color="primary" variant="contained">Create</Button>
                     </Grid>
                 </Grid>
-            </form>
+            </form>}
         </>
     );
 };

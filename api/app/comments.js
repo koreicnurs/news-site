@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const newsId = req.query.news_id;
     if(newsId) {
-        console.log(req.query.news_id);
         const [comments] = await mySqlDb.getConnection().query(`SELECT * FROM comments where news_id=${req.query.news_id}`);
         res.send(comments)
     } else {
