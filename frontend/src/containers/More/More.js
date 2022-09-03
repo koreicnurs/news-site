@@ -67,7 +67,7 @@ const More = () => {
                             Author: {c.author}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" className='message'>
-                            At {c.message}
+                            Message: {c.message}
                         </Typography>
                         <CardActions>
                             <Button className='btn-comment' size="small" onClick={() => clickDeleteComment(c.id)}>Delete</Button>
