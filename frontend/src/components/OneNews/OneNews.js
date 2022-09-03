@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardMedia, Typography} from "@mui/material";
+import {Button, Card, CardActions, CardMedia, Typography} from "@mui/material";
 import {apiUrl} from "../../config";
 
 const OneNews = (props) => {
@@ -12,6 +12,9 @@ const OneNews = (props) => {
         <Card className='image-board-card'>
             <Typography gutterBottom variant="h5" component="div" className='author'>
                 Author: {props.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" className='message'>
+                At {props.date}
             </Typography>
             <Typography variant="body2" color="text.secondary" className='message'>
                 Message: {props.description}
@@ -27,6 +30,10 @@ const OneNews = (props) => {
                             height="140"
                             sx={{display: 'none'}}
             />}
+            <CardActions>
+                <Button size="small" onClick={props.clickMore}>Read more</Button>
+                <Button size="small" onClick={props.clickDelete}>Delete</Button>
+            </CardActions>
         </Card>
     );
 };

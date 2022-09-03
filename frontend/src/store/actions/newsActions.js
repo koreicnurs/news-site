@@ -8,24 +8,32 @@ export const CREATE_NEWS_REQUEST = 'CREATE_NEWS_REQUEST';
 export const CREATE_NEWS_SUCCESS = 'CREATE_NEWS_SUCCESS';
 export const CREATE_NEWS_FAILURE = 'CREATE_NEWS_FAILURE';
 
-const fetchImageBoardsRequest = () => ({type: FETCH_NEWS_REQUEST});
-const fetchImageBoardsSuccess = news => ({type: FETCH_NEWS_SUCCESS, payload: news});
-const fetchImageBoardsFailure = error => ({type: FETCH_NEWS_FAILURE, payload: error});
+export const DELETE_NEWS_REQUEST = 'DELETE_NEWS_REQUEST';
+export const DELETE_NEWS_SUCCESS = 'DELETE_NEWS_SUCCESS';
+export const DELETE_NEWS_FAILURE = 'DELETE_NEWS_FAILURE';
 
-const createImageBoardRequest = () => ({type: CREATE_NEWS_REQUEST});
-const createImageBoardSuccess = () => ({type: CREATE_NEWS_SUCCESS});
-const createImageBoardFailure = error => ({type: CREATE_NEWS_FAILURE, payload: error});
+const fetchNewsRequest = () => ({type: FETCH_NEWS_REQUEST});
+const fetchNewsSuccess = news => ({type: FETCH_NEWS_SUCCESS, payload: news});
+const fetchNewsFailure = error => ({type: FETCH_NEWS_FAILURE, payload: error});
+
+const createNewsRequest = () => ({type: CREATE_NEWS_REQUEST});
+const createNewsSuccess = () => ({type: CREATE_NEWS_SUCCESS});
+const createNewsFailure = error => ({type: CREATE_NEWS_FAILURE, payload: error});
+
+const deleteNewsRequest = () => ({type: DELETE_NEWS_REQUEST});
+const deleteNewsSuccess = () => ({type: DELETE_NEWS_SUCCESS});
+const deleteNewsFailure = error => ({type: DELETE_NEWS_FAILURE, payload: error});
 
 export const getNews = () => {
     return async dispatch => {
         try {
-            dispatch(fetchImageBoardsRequest());
+            dispatch(fetchNewsRequest());
 
             const response = await axiosApi('/news');
 
-            dispatch(fetchImageBoardsSuccess(response.data));
+            dispatch(fetchNewsSuccess(response.data));
         } catch (e) {
-            dispatch(fetchImageBoardsFailure(e.message));
+            dispatch(fetchNewsFailure(e.message));
         }
     }
 };
@@ -33,11 +41,24 @@ export const getNews = () => {
 export const createNews = (data) => {
     return async dispatch => {
         try {
-            dispatch(createImageBoardRequest());
+            dispatch(createNewsRequest());
             await axiosApi.post('/news', data);
-            dispatch(createImageBoardSuccess());
+            dispatch(createNewsSuccess());
         } catch (e) {
-            dispatch(createImageBoardFailure(e.message));
+            dispatch(createNewsFailure(e.message));
+            throw e;
+        }
+    }
+};
+
+export const deleteNews = (id) => {
+    return async dispatch => {
+        try {
+            dispatch(deleteNewsRequest());
+            await axiosApi.delete(`/news/${id}`);
+            dispatch(deleteNewsSuccess());
+        } catch (e) {
+            dispatch(deleteNewsFailure(e.message));
             throw e;
         }
     }

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import {createNews, getNews} from "../../store/actions/newsActions";
+import {deleteNews, getNews} from "../../store/actions/newsActions";
 import OneNews from "../../components/OneNews/OneNews";
 import {NavLink} from "react-router-dom";
 
@@ -10,14 +10,14 @@ const News = () => {
     const loading = useSelector(state => state.newsCombine.loading);
     const news = useSelector(state => state.newsCombine.news);
 
-    const onNewsFormSubmit = async data => {
-        await dispatch(createNews(data));
-        await dispatch(getNews());
-    };
-
     useEffect(() => {
         dispatch(getNews());
     }, [dispatch]);
+
+    const deleteNewsSubmit = async (id) => {
+        await dispatch(deleteNews(id));
+        await dispatch(getNews());
+    };
 
     return loading ? <Spinner/> : (
         <>
@@ -26,8 +26,11 @@ const News = () => {
                     <OneNews
                         key={i.id}
                         title={i.title}
+                        date={i.datetime}
                         description={i.description}
                         image={i.image}
+                        // clickMore={}
+                        clickDelete={() => dispatch(deleteNewsSubmit(i.id))}
                     />
                 ))}
             </div>
