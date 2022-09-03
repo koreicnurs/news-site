@@ -5,6 +5,12 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const [comments] = await mySqlDb.getConnection().query('SELECT * from comments');
+    const newsId = req.query.news_id;
+    if(newsId) {
+        console.log(newsId);
+        const [comments] = await mySqlDb.getConnection().query('SELECT * FROM comments where news_id=newsId');
+        console.log(comments);
+    }
     res.send(comments);
 });
 
@@ -28,6 +34,14 @@ router.post('/',  async (req, res) => {
         ...comment,
         id: newComment.insertId,
     });
+});
+
+router.delete('/:id', async (req, res) => {
+    await mySqlDb.getConnection().query(
+        `DELETE FROM ?? WHERE id = ?`,
+        ['comments', req.params.id]
+    );
+    res.send('Deleted');
 });
 
 module.exports = router;
