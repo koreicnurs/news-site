@@ -8,20 +8,20 @@ export const CREATE_NEWS_REQUEST = 'CREATE_NEWS_REQUEST';
 export const CREATE_NEWS_SUCCESS = 'CREATE_NEWS_SUCCESS';
 export const CREATE_NEWS_FAILURE = 'CREATE_NEWS_FAILURE';
 
-const fetchImageBoardsRequest = () => ({type: FETCH_IMAGEBOARDS_REQUEST});
-const fetchImageBoardsSuccess = imageBoards => ({type: FETCH_IMAGEBOARDS_SUCCESS, payload: imageBoards});
-const fetchImageBoardsFailure = error => ({type: FETCH_IMAGEBOARDS_FAILURE, payload: error});
+const fetchImageBoardsRequest = () => ({type: FETCH_NEWS_REQUEST});
+const fetchImageBoardsSuccess = news => ({type: FETCH_NEWS_SUCCESS, payload: news});
+const fetchImageBoardsFailure = error => ({type: FETCH_NEWS_FAILURE, payload: error});
 
 const createImageBoardRequest = () => ({type: CREATE_NEWS_REQUEST});
 const createImageBoardSuccess = () => ({type: CREATE_NEWS_SUCCESS});
 const createImageBoardFailure = error => ({type: CREATE_NEWS_FAILURE, payload: error});
 
-export const getImageBoards = () => {
+export const getNews = () => {
     return async dispatch => {
         try {
             dispatch(fetchImageBoardsRequest());
 
-            const response = await axiosApi('/board');
+            const response = await axiosApi('/news');
 
             dispatch(fetchImageBoardsSuccess(response.data));
         } catch (e) {
@@ -30,11 +30,11 @@ export const getImageBoards = () => {
     }
 };
 
-export const createImageBoard = (boardData) => {
+export const createNews = (data) => {
     return async dispatch => {
         try {
             dispatch(createImageBoardRequest());
-            await axiosApi.post('/board', boardData);
+            await axiosApi.post('/news', data);
             dispatch(createImageBoardSuccess());
         } catch (e) {
             dispatch(createImageBoardFailure(e.message));
