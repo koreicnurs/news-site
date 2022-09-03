@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Card, CardMedia, Grid, TextField, Typography} from "@mui/material";
 import {createComment} from "../../store/actions/commetsActions";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 const More = () => {
 
@@ -28,7 +29,7 @@ const More = () => {
         });
     };
 
-    return oneNews && (
+    return loading ? <Spinner/> : oneNews && (
         <>
             <Card className='image-board-card'>
                 <Typography gutterBottom variant="h5" component="div" className='author'>

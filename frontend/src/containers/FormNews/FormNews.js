@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {Button, Grid, TextField} from "@mui/material";
 import FileInput from "../../components/UI/FIleInput/FileInput";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {createNews} from "../../store/actions/newsActions";
 
 const FormNews = () => {
     const dispatch = useDispatch();
+    const loading = useSelector(state => state.commentsCombine.loading);
+    const news = useSelector(state => state.commentsCombine.news);
+
     const [state, setState] = useState({
         title: "",
         description: "",
