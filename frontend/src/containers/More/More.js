@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {Card, CardMedia, Typography} from "@mui/material";
+import {Button, Card, CardMedia, Grid, TextField, Typography} from "@mui/material";
 import {apiUrl} from "../../config";
+import {createNews} from "../../store/actions/newsActions";
+import FileInput from "../../components/UI/FIleInput/FileInput";
+import {createComment} from "../../store/actions/commetsActions";
 
 const More = () => {
 
@@ -9,8 +12,23 @@ const More = () => {
     const loading = useSelector(state => state.newsCombine.loading);
     const oneNews = useSelector(state => state.newsCombine.oneNews);
 
-    const deleteNewsSubmit = async (id) => {
+    const [state, setState] = useState({
+        author: "",
+        message: "",
+        news_id: Number(""),
+    });
 
+    const submitFormHandler = e => {
+        e.preventDefault();
+        dispatch(createComment(state));
+    };
+
+    const inputChangeHandler = e => {
+        const {name, value} = e.target;
+
+        setState(prevState => {
+            return {...prevState, [name]: value};
+        });
     };
 
     return oneNews && (
@@ -36,6 +54,61 @@ const More = () => {
                                 sx={{display: 'none'}}
                 />}
             </Card>
+            <form
+                autoComplete="off"
+                onSubmit={submitFormHandler}
+                style={{marginBottom: '50px'}}
+            >
+                <Grid
+                    container
+                    maxWidth="md"
+                    textAlign="center"
+                    marginX="auto"
+                    direction="column"
+                    rowSpacing={2}
+                >
+                    <Grid item>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            label="Author"
+                            name="author"
+                            value={state.author}
+                            onChange={inputChangeHandler}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            required
+                            fullWidth
+                            variant="outlined"
+                            type="text"
+                            label="Message"
+                            name="message"
+                            value={state.message}
+                            onChange={inputChangeHandler}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            required
+                            fullWidth
+                            variant="outlined"
+                            type="number"
+                            label="ID"
+                            name="news_id"
+                            value={state.news_id}
+                            onChange={inputChangeHandler}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <Button type="submit" color="primary" variant="contained">Create</Button>
+                    </Grid>
+                </Grid>
+            </form>
         </>
     );
 };
