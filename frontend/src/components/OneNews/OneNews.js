@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Card, CardActions, CardMedia, Typography} from "@mui/material";
 import {apiUrl} from "../../config";
-import {NavLink} from "react-router-dom";
+import {NavLink, useRouteMatch} from "react-router-dom";
 
 const OneNews = (props) => {
     let newsImage = null;

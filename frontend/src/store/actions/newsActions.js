@@ -1,4 +1,5 @@
 import axiosApi from "../../axiosApi";
+import {getComments} from "./commetsActions";
 
 export const FETCH_NEWS_REQUEST = 'FETCH_NEWS_REQUEST';
 export const FETCH_NEWS_SUCCESS = 'FETCH_NEWS_SUCCESS';
@@ -76,7 +77,7 @@ export const getOneNews = (id) => {
     return async dispatch => {
         try {
             dispatch(getOneNewsRequest());
-
+            dispatch(getComments(id));
             const response = await axiosApi(`/news/${id}`);
 
             dispatch(getOneNewsSuccess(response.data));

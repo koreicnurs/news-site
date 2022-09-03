@@ -24,12 +24,12 @@ const deleteCommentRequest = () => ({type: DELETE_COMMENT_REQUEST});
 const deleteCommentSuccess = () => ({type: DELETE_COMMENT_SUCCESS});
 const deleteCommentFailure = error => ({type: DELETE_COMMENT_FAILURE, payload: error});
 
-export const getComments = () => {
+export const getComments = (id) => {
     return async dispatch => {
         try {
             dispatch(fetchCommentsRequest());
 
-            const response = await axiosApi('/comments');
+            const response = await axiosApi(`/comments?news_id=${id}`);
 
             dispatch(fetchCommentsSuccess(response.data));
         } catch (e) {

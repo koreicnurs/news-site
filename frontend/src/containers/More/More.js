@@ -1,20 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {Button, Card, CardMedia, Grid, TextField, Typography} from "@mui/material";
-import {createComment} from "../../store/actions/commetsActions";
+import {Button, Card, CardActions, CardMedia, Grid, TextField, Typography} from "@mui/material";
+import {createComment, deleteComment, getComments} from "../../store/actions/commetsActions";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import {useRouteMatch} from "react-router-dom";
 
 const More = () => {
 
     const dispatch = useDispatch();
     const loading = useSelector(state => state.newsCombine.loading);
     const oneNews = useSelector(state => state.newsCombine.oneNews);
+    const comments = useSelector(state => state.commentsCombine.comments);
 
     const [state, setState] = useState({
         author: "",
         message: "",
         news_id: Number(""),
     });
+
+    const clickDeleteComment = (id) => {
+        dispatch(deleteComment(id))
+    };
 
     const submitFormHandler = e => {
         e.preventDefault();
@@ -52,6 +58,23 @@ const More = () => {
                                 sx={{display: 'none'}}
                 />}
             </Card>
+
+            { comments.map(c => (
+                <Card className='image-board-card' key={c.id}>
+                    <Typography gutterBottom variant="h5" component="div" className='author'>
+                        Author: {c.author}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" className='message'>
+                        At {c.message}
+                    </Typography>
+                    <CardActions>
+                        <Button size="small" onClick={() => clickDeleteComment(c.id)}>Delete</Button>
+                    </CardActions>
+                </Card>
+            ))
+            }
+
+
             <form
                 autoComplete="off"
                 onSubmit={submitFormHandler}
