@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import {deleteNews, getNews} from "../../store/actions/newsActions";
+import {deleteNews, getNews, getOneNews} from "../../store/actions/newsActions";
 import OneNews from "../../components/OneNews/OneNews";
 import {NavLink} from "react-router-dom";
 
@@ -29,7 +29,8 @@ const News = () => {
                         date={i.datetime}
                         description={i.description}
                         image={i.image}
-                        // clickMore={}
+                        oneId={i.id}
+                        clickMore={() => dispatch(getOneNews(i.id))}
                         clickDelete={() => dispatch(deleteNewsSubmit(i.id))}
                     />
                 ))}

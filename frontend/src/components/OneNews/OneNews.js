@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Card, CardActions, CardMedia, Typography} from "@mui/material";
 import {apiUrl} from "../../config";
+import {NavLink} from "react-router-dom";
 
 const OneNews = (props) => {
     let newsImage = null;
@@ -31,7 +32,7 @@ const OneNews = (props) => {
                             sx={{display: 'none'}}
             />}
             <CardActions>
-                <Button size="small" onClick={props.clickMore}>Read more</Button>
+                <NavLink className='btn-link add-link' to={`/news/${props.oneId}`} onClick={props.clickMore}>Read More</NavLink>
                 <Button size="small" onClick={props.clickDelete}>Delete</Button>
             </CardActions>
         </Card>
